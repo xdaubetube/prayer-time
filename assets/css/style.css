@@ -1,0 +1,172 @@
+/* ===========================
+    Common CSS
+=========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+:root {
+    --primary-color: #40916C;
+    --secondary-color: #131515;
+    --primary-font: 'Montserrat', sans-serif;
+    --secondary-font: 'Roboto', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    height: 100%;
+}
+
+body {
+    font-family: var(--secondary-font);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.btn {
+    padding: 0.7rem 2rem;
+    background: var(--secondary-color);
+    color: white;
+    font-weight: 500;
+    font-size: 1rem;
+    text-align: center;
+    border: none;
+    outline: none;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: .2rem;
+    display: inline-block;
+    transition: 0.3s;
+}
+
+.btn:hover,
+.btn:focus,
+.btn.active {
+    background: var(--primary-color);
+}
+
+.section {
+    padding: 100px 0;
+}
+
+/* ===========================
+    Columns CSS
+=========================== */
+
+.container {
+    max-width: 1111px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.container .row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.container .row .col {
+    width: 370px;
+    padding: 0 1.5rem;
+    margin-bottom: 3rem;
+}
+
+/* ===========================
+    Hero Section CSS
+=========================== */
+
+.hero-section {
+    padding: 100px 0;
+    background: rgba(64, 145, 108, 0.20);
+    min-height: 600px;
+    display: grid;
+    place-items: center;
+}
+
+.hero-section .container {
+    max-width: 500px;
+    width: 100%;
+}
+
+.hero-section .container .content {
+    text-align: center;
+}
+
+.hero-section .container .content .title {
+    color: var(--secondary-color);
+    font-family: var(--primary-font);
+    font-weight: 800;
+    font-size: 3rem;
+}
+
+.hero-section .container .content .title span {
+    color: var(--primary-color);
+}
+
+.hero-section .container .content .about {
+    margin: 1.5rem;
+    color: #666;
+    font-weight: 400;
+    font-size: 1.3rem;
+    line-height: 2rem;
+}
+
+/* ===========================
+    Times Section CSS
+=========================== */
+
+.times {
+    padding-top: calc(100px + 3rem);
+}
+
+.times .item {
+    background: var(--secondary-color);
+    border-radius: .3rem;
+    padding: 4rem 2rem;
+    color: white;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.times .item:hover {
+    background: var(--primary-color);
+}
+
+.times .item .time {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: .5rem;
+}
+
+.times .item .txt {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+/* ===========================
+    Times Section CSS
+=========================== */
+footer {
+    padding: 1.5rem 0;
+    border-top: 1px solid #dee2e6;
+    background: #f8f9fa;
+    margin-top: auto;
+}
+
+footer .footer-text {
+    text-align: center;
+    font-weight: 500;
+    color: var(--secondary-color);
+}
+
+footer .footer-text a {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
