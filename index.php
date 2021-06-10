@@ -60,7 +60,7 @@ if ($json_array["status"] == "OK") {
     <meta property="twitter:image" content="https://prayertimedev.herokuapp.com/assets/screenshot/1.png">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="assets/images/favicon.jpg" type="image/x-icon">
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
