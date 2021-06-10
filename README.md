@@ -6,7 +6,9 @@ This is a Prayer Time checker PHP Script. And if you don't know when the next ti
 
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](https://github.com/MusabDev/prayer-time/blob/main/assets/screenshot/1.png?raw=true)
+
+![App Screenshot](https://github.com/MusabDev/prayer-time/blob/main/assets/screenshot/2.png?raw=true)
 
   
 ## Authors
