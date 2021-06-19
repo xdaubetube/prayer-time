@@ -1,6 +1,7 @@
 <?php 
 
-$user_ip = $_SERVER["REMOTE_ADDR"];
+// $user_ip = $_SERVER["REMOTE_ADDR"]; // This is dynamic ip
+$user_ip = "43.245.140.24"; // This is static ip
 $json = file_get_contents("https://api.pray.zone/v2/times/today.json?ip=" . $user_ip . "&timeformat=1");
 $json_array = json_decode($json, true);
 if ($json_array["status"] == "OK") {
