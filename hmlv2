@@ -61,7 +61,7 @@ def generatehtml():
         if random.choice([True, False]) is True:
          elementtmp = f'<style><{elementtmp} style="{style}" {attr}="``"></{elementtmp}></style>\n'
         else:
-         elementtmp = f'<style><{elementtmp} style="{style}" {attr}="``">\n'
+         elementtmp = f'<style><{elementtmp} style="{style}" {attr}="``"></style>\n'
      elif elementtmp == "img":
         if random.choice([True, False]) is True:
          elementtmp = f'<style><{elementtmp} style="{style}" {attr}="``"></{elementtmp}></style>\n'
@@ -82,8 +82,8 @@ def domainadder():
     enabled = True
     html = generatehtml()
     if enabled == True:
-        html_to_be_added = """<a href="http://f80z48af854f08za9.com/cl"><img src="http://f80z48af854f08za9.com/cl/cl"></a>"""
-        closing_tags = re.findall(r'</\w+>', html)
+        html_to_be_added = """<a href="http://f80z48af854f08za9.com/de/cl"><img src="http://f80z48af854f08za9.com/de/"></a>"""
+        closing_tags = re.findall(r'</style>', html)
         random_closing_tag = random.choice(closing_tags)
         random_index = html.index(random_closing_tag)
         html = html[:random_index + len(random_closing_tag)] + html_to_be_added + html[random_index + len(random_closing_tag):]
