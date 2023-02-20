@@ -1,0 +1,16 @@
+From: "Support[a5]" <sde-[a5]@ea.com>
+Date: [mail_date]
+Subject: [subject]
+Message-ID: [MID]
+To: [email]
+Content-Type: multipart/alternative; boundary="[boundary]"
+MIME-Version: 1.0
+
+--[boundary]
+Content-Type: text/html;charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+[text]
+[text]
+[text]
+--[boundary]--
