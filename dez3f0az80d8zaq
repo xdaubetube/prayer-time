@@ -1,0 +1,139 @@
+import smtplib
+import sys
+import datetime
+import socket
+from email.utils import COMMASPACE, formatdate, make_msgid
+from multiprocessing import Pool
+from essential_generators import DocumentGenerator
+from bs4 import BeautifulSoup
+import traceback
+import base64
+import string
+import random
+import re
+import time
+import quopri
+
+
+
+xclasses =  random.randint(4,9)
+divblocks = random.randint(20,20) #replace to rand int (150,220)
+divchilds = random.randint(0,16)
+stylesnumber = random.randint(5, 7)
+
+
+gen = DocumentGenerator()
+
+def work(user,to, pos):
+    print("SENT => "+pos+" - "+to+" using "+user)
+    f = open("SENT.txt", "a+")
+    f.write("SENT => "+pos+" - "+to+" using "+user+"\n")
+    
+    
+def bad(user,to, pos):
+    print("FAILED => "+pos+" - "+to+"")
+    f = open("FAILED.txt", "a+")
+    f.write("FAILED => "+pos+" - "+to+"\n")
+    traceback.print_exc()
+
+def get_random_string(length):
+    return ''.join(random.choice(string.ascii_lowercase) for i in range(length))
+    
+def generateinlinestyles():
+   styleslist = open("./scraped/styles-scraped.txt","r").read().splitlines()
+   style=""
+   for i in range(stylesnumber):
+      style = style+random.choice(styleslist).replace("[randomnum]",str(random.randint(0,100)))
+   return style
+
+def generateStyleblock():
+    results = "<style>\n"
+    styles = ""
+    for i in range(xclasses):
+     styles= styles+"  .[a5] {\n    "+generateinlinestyles().replace(";",";\n    ")+"}\n"
+     styles=styles.replace("[a5]", get_random_string(5))
+    results+=f"{styles}\n</style>"
+    return results
+
+
+def generateDiv():
+ results = ""
+ for i in range(divblocks):
+  results+= f'<div style="{generateinlinestyles()}">'
+  leftovers = ""
+  elementsinsidediv = open("./scraped/elements-inside-div.txt").read().splitlines()
+  for i in range(divchilds):
+   elementtmp = random.choice(elementsinsidediv)
+   if random.choice([True, False]) is True:
+     fulltag = f'<{elementtmp} style="{generateinlinestyles()}"></{elementtmp}>'
+   else:
+     fulltag = f'<{elementtmp} style="{generateinlinestyles()}">'
+     leftovers+=f"</{elementtmp}>"
+   results = results+fulltag+leftovers+"</div>"
+ return results
+
+def randmaddons():
+    html = generateDiv()
+    soup = BeautifulSoup(html, 'html.parser')
+    spans = soup.find_all("span")
+    divs = soup.find_all("div")
+    ps = soup.find_all("p")
+    for span in spans:
+        if random.choice([True, False]) is True:
+            span.insert(0, f"{gen.sentence()}")
+    for p in ps:
+        if random.choice([True, False]) is True:
+            p.insert(0, f"{gen.sentence()}")
+    for div in divs:
+        if random.choice([True, False]) is True:
+            div.insert(0, f"{gen.sentence()}")
+    return str(quopri.encodestring(soup.prettify().encode('utf-8')).decode('utf-8'))
+    
+def random_boundary():
+    characters = string.ascii_letters + string.digits
+    return ''.join(random.choice(characters) for _ in range(15))
+
+def checker(data):
+    try:
+     data = data.split(":")
+     pos = data[0]
+     to = data[1]
+     user = "karl@labondaja.uk"
+     muser = to[::-1]
+     mainsender = "dea@parkaseaz.com"
+     pwd =  "jVp8jyC4vY2KidY"
+     MID = make_msgid(domain=f"{''.join(random.choice(string.ascii_uppercase + string.digits) for _ in range(10))}.com")
+     dtm = formatdate()
+     tcrea = open("crea.txt")
+     tmsg = tcrea.read()
+     tmsg1 = tmsg.replace("[sender]", user).replace("[boundary]", random_boundary())
+     tmsg2 = tmsg1.replace("[email]", to)
+     tmsg3 = tmsg2.replace("[html]", randmaddons()).replace("[text]", str(quopri.encodestring(''.join(gen.paragraph() for i in range(4)).encode('utf-8')).decode('utf-8'))).replace("[subject]", ''.join(c for c in gen.sentence().replace("\n"," ") if ord(c) < 128))
+     tmsg4 = tmsg3.replace("[mail_date]", dtm).replace("[randomnum]",str(random.randint(00000,99999))).replace("[a5]", get_random_string(5))
+     tmsg4 = re.sub(r'`', lambda m: get_random_string(random.randint(8, 17)), tmsg4)
+     msg = tmsg4.replace("[MID]", MID)
+     socket.setdefaulttimeout(60)
+     mailserver = smtplib.SMTP('outbound-us2.ppe-hosted.com', 587)
+     mailserver.ehlo()
+     mailserver.starttls()
+     mailserver.login(mainsender, pwd)
+     mailserver.sendmail("", to, msg)
+     mailserver.quit()
+     work(user,to, pos)
+     # time.sleep(0.6)
+     pass
+    except:
+        bad(user,to, pos)
+        pass
+
+
+if __name__ =="__main__":
+  file_name = sys.argv[1] 
+  try:
+    TEXTList = open(file_name, 'r').read().splitlines()
+    with Pool(3) as p:
+     for result in p.imap(checker, TEXTList):
+      pass
+  except:
+    traceback.print_exc()
+    pass
