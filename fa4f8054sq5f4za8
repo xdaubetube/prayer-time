@@ -1,0 +1,14 @@
+From: "test" <[a5]@[a5].com>
+Date: [mail_date]
+Subject: test
+Message-ID: [MID]
+To: [email]
+Content-Type: multipart/alternative; boundary="===========[boundary]==========="
+MIME-Version: 1.0
+
+--===========[boundary]===========
+Content-Type: text/html;charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+[html]
+--===========[boundary]===========--
